@@ -29,8 +29,8 @@ dependencies {
 }
 
 publish {
-    bintrayUser = project.property('USER')
-    bintrayKey = project.property('KEY')
+    bintrayUser = System.getenv("USER")
+    bintrayKey = System.getenv("KEY")
     dryRun = false
     userOrg = 'tangyuanyuan'
     repoName = 'maven'
