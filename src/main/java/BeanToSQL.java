@@ -14,17 +14,6 @@ public class BeanToSQL {
         return this;
     }
 
-    //    private String prettyOutput(String sql) {
-//        StringBuilder builder = new StringBuilder(sql);
-//        for (int i = 0; i < builder.length(); i++) {
-//            char c = builder.charAt(i);
-//            if ((c == '(' && builder.charAt(i - 2) == '`') || c == ',') {
-//                builder.insert(i + 1, '\n');
-//                i++;
-//            }
-//        }
-//        return builder.toString();
-//    }
     private String prettyOutput(String sql) {
         Stack<Character> stack = new Stack<>();
         StringBuilder builder = new StringBuilder();

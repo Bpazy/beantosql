@@ -1,12 +1,22 @@
-group 'com.github.bpazy'
-version '1.0-SNAPSHOT'
+group 'com.github'
+version '0.0.2'
 
 task wrapper(type: Wrapper) {
   gradleVersion = '3.1'
   distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
 }
 
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.novoda:bintray-release:0.4.0'
+    }
+}
+
 apply plugin: 'java'
+apply plugin: 'com.novoda.bintray-release'
 
 sourceCompatibility = 1.8
 
@@ -16,4 +26,17 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+publish {
+    bintrayUser = project.property('USER')
+    bintrayKey = project.property('KEY')
+    dryRun = false
+    userOrg = 'tangyuanyuan'
+    repoName = 'maven'
+    groupId = 'com.github.bpazy'
+    artifactId = 'beantosql'
+    publishVersion = project.version
+    desc = 'transform java bean to sql.'
+    website = 'https://github.com/Bpazy/beantosql'
 }
