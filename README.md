@@ -15,7 +15,12 @@ Download the latest JAR or grab via Maven:
 ```
 or Gradle:
 ```groovy
-compile 'com.github.Bpazy:beantosql:0.0.2'
+repositories {
+    jcenter()
+}
+dependencies {
+    compile 'com.github.Bpazy:beantosql:0.0.2'
+}
 ```
 
 Usage
