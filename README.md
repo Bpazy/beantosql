@@ -2,6 +2,25 @@ beantosql
 =========
 This is a util to simplify the process between SQL table and Java Bean.
 
+Download
+--------
+Download the latest JAR or grab via Maven:
+```xml
+<dependency>
+  <groupId>com.github.Bpazy</groupId>
+  <artifactId>beantosql</artifactId>
+  <version>0.0.2</version>
+  <type>pom</type>
+</dependency>
+```
+or Gradle:
+```groovy
+compile 'com.github.Bpazy:beantosql:0.0.2'
+```
+
+Usage
+-----
+
 Within the bean named `TestBean`
 ```
 public class TestBean {
@@ -30,8 +49,8 @@ And then paste it into your DMS to create your table.
 
 
 
-beantosql
-=========
+中文
+---
 这是一款简化你在数据库的表和Java Bean之间同步修改的工具。
 
 假设你有一个名字为`TestBean`的Java Bean
