@@ -1,4 +1,5 @@
 import annotation.Name;
+import annotation.PrimaryKey;
 
 import java.util.Date;
 
@@ -8,6 +9,7 @@ import java.util.Date;
  */
 public class TestBean {
     @Name("id123")
+    @PrimaryKey
     private int id;
     private String name;
     private String content;

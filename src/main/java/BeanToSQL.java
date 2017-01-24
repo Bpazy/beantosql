@@ -1,4 +1,5 @@
 import annotation.Name;
+import annotation.PrimaryKey;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -79,11 +80,18 @@ public class BeanToSQL {
         List<MyField> fields = new ArrayList<>();
         for (Field f : declaredFields) {
             Name name = f.getDeclaredAnnotation(Name.class);
-            MyField field;
+            PrimaryKey primaryKey = f.getDeclaredAnnotation(PrimaryKey.class);
+            boolean isPrimary = primaryKey != null;
+
+            MyField field = new MyField();
+            field.setPrimary(isPrimary);
             if (name != null) {
-                field = new MyField(name.value(), f.getType());
+                field.setName(name.value())
+                        .setNamed(true)
+                        .setType(f.getType());
             } else {
-                field = new MyField(f.getName(), f.getType());
+                field.setName(f.getName())
+                        .setType(f.getType());
             }
             fields.add(field);
         }
@@ -95,20 +103,37 @@ public class BeanToSQL {
         String tableNameSql = String.format("CREATE TABLE `%s`", tableName);
 
         StringBuilder fieldSQLBuilder = new StringBuilder();
+        List<String> primaries = new ArrayList<>();
         fields.forEach(field -> {
             String fieldName = fieldConvert(field);
             String fieldTypeName = typeConvert(field.getType().getName());
+            if (field.isPrimary()) { // if the key is primary key, it will be added to list for the next handle.
+                primaries.add(fieldName);
+            }
             fieldSQLBuilder.append(
                     String.format("`%s` %s NOT NULL,",
                             fieldName,
                             fieldTypeName));
         });
-        fieldSQLBuilder.append("PRIMARY KEY (`id`)");
+//        fieldSQLBuilder.append("PRIMARY KEY (`id`)");
+        handlePrimaries(fieldSQLBuilder, primaries);
 
         return String.format("%s (%s);", tableNameSql, fieldSQLBuilder.toString());
     }
 
+    private void handlePrimaries(StringBuilder fieldSQLBuilder, List<String> primaries) {
+        if (primaries.size() == 0) {
+            fieldSQLBuilder.append("PRIMARY KEY (`id`)");
+        }
+        primaries.forEach(primaryName ->
+                fieldSQLBuilder.append(
+                        String.format("PRIMARY KEY (`%s`)", primaryName)));
+    }
+
     private String fieldConvert(MyField field) {
+        if (field.isNamed()) {
+            return field.getName();
+        }
         String name = field.getName();
         StringBuilder builder = new StringBuilder(name);
         for (int i = 0; i < builder.length(); i++) {

@@ -4,11 +4,32 @@
  */
 public class MyField {
     private String name;
+    private boolean named;
     private Class<?> type;
-
+    private boolean primary;
     public MyField(String name, Class<?> type) {
         this.name = name;
         this.type = type;
+    }
+    public MyField() {
+    }
+
+    public boolean isNamed() {
+        return named;
+    }
+
+    public MyField setNamed(boolean named) {
+        this.named = named;
+        return this;
+    }
+
+    public boolean isPrimary() {
+        return primary;
+    }
+
+    public MyField setPrimary(boolean primary) {
+        this.primary = primary;
+        return this;
     }
 
     public String getName() {
