@@ -1,3 +1,4 @@
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -72,9 +73,9 @@ public class BeanToSQL {
     }
 
     private List<MyField> getFields(Class c) {
-        java.lang.reflect.Field[] declaredFields = c.getDeclaredFields();
+        Field[] declaredFields = c.getDeclaredFields();
         List<MyField> fields = new ArrayList<>();
-        for (java.lang.reflect.Field f : declaredFields) {
+        for (Field f : declaredFields) {
             MyField field = new MyField(f.getName(), f.getType());
             fields.add(field);
         }
