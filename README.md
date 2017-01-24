@@ -9,7 +9,7 @@ Download the latest JAR or grab via Maven:
 <dependency>
   <groupId>com.github.Bpazy</groupId>
   <artifactId>beantosql</artifactId>
-  <version>0.0.3</version>
+  <version>0.0.4</version>
   <type>pom</type>
 </dependency>
 ```
@@ -19,7 +19,7 @@ repositories {
     jcenter()
 }
 dependencies {
-    compile 'com.github.Bpazy:beantosql:0.0.3'
+    compile 'com.github.Bpazy:beantosql:0.0.4'
 }
 ```
 
@@ -60,6 +60,10 @@ Such as
 private int name;
 ```
 This bean's field `name` will be transformed into `` `id` int NOT NULL``.
+
+`@Name` to custom column name.
+`@PrimaryKey` to define primary key.
+
 
 中文
 ---
