@@ -22,7 +22,7 @@ public class TestConvert {
         for (Field f : fields) {
             FieldName name = f.getDeclaredAnnotation(FieldName.class);
             if (name != null) {
-                System.out.println(name.value());
+                System.out.println(f.getName() + name.value());
             }
         }
     }
