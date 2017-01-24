@@ -53,7 +53,7 @@ CREATE TABLE `TestBean` (
 And then paste it into your DMS to create your table.
 
 
-Annotation @Name on bean's field give you ability to custom column name.
+Annotation `@Name` on bean's field give you ability to custom column name.
 Such as
 ```
 @Name("id")
