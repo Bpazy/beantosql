@@ -1,4 +1,4 @@
-import annotation.FieldName;
+import annotation.Name;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -78,10 +78,10 @@ public class BeanToSQL {
         Field[] declaredFields = c.getDeclaredFields();
         List<MyField> fields = new ArrayList<>();
         for (Field f : declaredFields) {
-            FieldName fieldName = f.getDeclaredAnnotation(FieldName.class);
+            Name name = f.getDeclaredAnnotation(Name.class);
             MyField field;
-            if (fieldName != null) {
-                field = new MyField(fieldName.value(), f.getType());
+            if (name != null) {
+                field = new MyField(name.value(), f.getType());
             } else {
                 field = new MyField(f.getName(), f.getType());
             }

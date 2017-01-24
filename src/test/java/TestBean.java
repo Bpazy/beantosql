@@ -1,4 +1,4 @@
-import annotation.FieldName;
+import annotation.Name;
 
 import java.util.Date;
 
@@ -7,7 +7,7 @@ import java.util.Date;
  * on 2017/1/23
  */
 public class TestBean {
-    @FieldName("123")
+    @Name("123")
     private int id;
     private String name;
     private String content;

@@ -1,4 +1,4 @@
-import annotation.FieldName;
+import annotation.Name;
 import org.junit.Test;
 
 import java.lang.reflect.Field;
@@ -20,7 +20,7 @@ public class TestConvert {
         Class<TestBean> clazz = TestBean.class;
         Field[] fields = clazz.getDeclaredFields();
         for (Field f : fields) {
-            FieldName name = f.getDeclaredAnnotation(FieldName.class);
+            Name name = f.getDeclaredAnnotation(Name.class);
             if (name != null) {
                 System.out.println(f.getName() + name.value());
             }
