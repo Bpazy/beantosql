@@ -11,7 +11,12 @@ public class TestConvert {
 
     @Test
     public void convert() {
-        String go = new BeanToSQL().prettyPrinting().go(TestBean.class);
+        String go = new BeanToSQL().prettyPrinting().go("class Test {\n" +
+                "    private int id;\n" +
+                "    private String name;\n" +
+                "    private String content;\n" +
+                "    private Date date;\n" +
+                "}");
         System.out.println(go);
     }
 
