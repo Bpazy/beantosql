@@ -75,6 +75,11 @@ public class BeanToSQL {
         return prettyPrinting ? prettyOutput(sql) : sql;
     }
 
+    //TODO 解析类字符串
+    public String go(String clazz) {
+        return "";
+    }
+
     private List<MyField> getFields(Class c) {
         Field[] declaredFields = c.getDeclaredFields();
         List<MyField> fields = new ArrayList<>();
@@ -115,7 +120,6 @@ public class BeanToSQL {
                             fieldName,
                             fieldTypeName));
         });
-//        fieldSQLBuilder.append("PRIMARY KEY (`id`)");
         handlePrimaries(fieldSQLBuilder, primaries);
 
         return String.format("%s (%s);", tableNameSql, fieldSQLBuilder.toString());
