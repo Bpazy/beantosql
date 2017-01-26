@@ -64,6 +64,26 @@ This bean's field `name` will be transformed into `` `id` int NOT NULL``.
 `@Name` to custom column name.
 `@PrimaryKey` to define primary key.
 
+beantosql also support class of string:
+```Java
+String go = new BeanToSQL().prettyPrinting().go("class Test {\n" +
+                "    private int id;\n" +
+                "    private String name;\n" +
+                "    private String content;\n" +
+                "    private Date date;\n" +
+                "}");
+System.out.println(go);
+```
+You would get
+```sql
+CREATE TABLE `Test` (
+  `id`  NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `content` varchar(255) NOT NULL,
+  `date` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+);
+```
 
 中文
 ---
