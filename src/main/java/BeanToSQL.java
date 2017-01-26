@@ -72,22 +72,16 @@ public class BeanToSQL {
     }
 
     public String go(Class c) {
-        List<MyField> fieldNames = getFields(c);
-        String sql = createSQL(c, fieldNames);
+        List<MyField> fields = getFields(c);
+        String sql = createSQL(c.getName(), fields);
         return prettyPrinting ? prettyOutput(sql) : sql;
     }
 
-    //TODO 解析类字符串
     public String go(String clazz) {
-        try {
-            String className = getClassName(clazz);
-            List<MyField> fields = getFields(clazz);
-            System.out.println(className);
-            fields.forEach(field -> System.out.println(field.getType() + " " + field.getName()));
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return "";
+        String className = getClassName(clazz);
+        List<MyField> fields = getFields(clazz);
+        String sql = createSQL(className, fields);
+        return prettyPrinting ? prettyOutput(sql) : sql;
     }
 
     private String getClassName(String clazz) {
@@ -96,22 +90,27 @@ public class BeanToSQL {
         return matcher.find() ? matcher.group(1).trim() : "";
     }
 
-    private List<MyField> getFields(String clazz) throws ClassNotFoundException {
+    private List<MyField> getFields(String clazz) {
         List<MyField> list = new ArrayList<>();
         Pattern pattern = Pattern.compile("(?:(?:pubic)|(?:private)) (.+?) (.+?);");
         Matcher matcher = pattern.matcher(clazz);
         while (matcher.find()) {
             MyField field = new MyField();
-            String classWithPackage = getPackageClass(matcher);
-            field.setName(matcher.group(2))
-                    .setType(Class.forName(classWithPackage));
+            //TODO add annotation support
+            String classWithPackage = getPackageClass(matcher.group(1));
+            try {
+                field.setName(matcher.group(2))
+                        .setType(Class.forName(classWithPackage));
+            } catch (ClassNotFoundException e) {
+                throw new GetPackageClassException();
+            }
             list.add(field);
         }
         return list;
     }
 
-    private String getPackageClass(Matcher matcher) throws ClassNotFoundException {
-        switch (matcher.group(1)) {
+    private String getPackageClass(String clazz) {
+        switch (clazz) {
             case "String":
                 return "java.lang.String";
             case "int":
@@ -119,7 +118,7 @@ public class BeanToSQL {
             case "Date":
                 return "java.util.Date";
             default:
-                throw new ClassNotFoundException();
+                throw new GetPackageClassException();
         }
     }
 
@@ -146,8 +145,7 @@ public class BeanToSQL {
         return fields;
     }
 
-    private String createSQL(Class c, List<MyField> fields) {
-        String tableName = c.getName();
+    private String createSQL(String tableName, List<MyField> fields) {
         String tableNameSql = String.format("CREATE TABLE `%s`", tableName);
 
         StringBuilder fieldSQLBuilder = new StringBuilder();
