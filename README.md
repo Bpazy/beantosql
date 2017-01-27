@@ -9,7 +9,7 @@ Download the latest JAR or grab via Maven:
 <dependency>
   <groupId>com.github.bpazy</groupId>
   <artifactId>beantosql</artifactId>
-  <version>0.1.0</version>
+  <version>0.1.1</version>
   <type>pom</type>
 </dependency>
 ```
@@ -19,7 +19,7 @@ repositories {
     jcenter()
 }
 dependencies {
-    compile 'com.github.bpazy:beantosql:0.1.0'
+    compile 'com.github.bpazy:beantosql:0.1.1'
 }
 ```
 
