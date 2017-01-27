@@ -1,5 +1,7 @@
-import annotation.Name;
-import annotation.PrimaryKey;
+package com.github.bpazy;
+
+import com.github.bpazy.annotation.Name;
+import com.github.bpazy.annotation.PrimaryKey;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -96,7 +98,7 @@ public class BeanToSQL {
         Matcher matcher = pattern.matcher(clazz);
         while (matcher.find()) {
             MyField field = new MyField();
-            //TODO add annotation support
+            //TODO add com.github.bpazy.annotation support
             String classWithPackage = getPackageClass(matcher.group(1));
             try {
                 field.setName(matcher.group(2))

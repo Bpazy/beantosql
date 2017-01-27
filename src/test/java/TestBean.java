@@ -1,5 +1,5 @@
-import annotation.Name;
-import annotation.PrimaryKey;
+import com.github.bpazy.annotation.Name;
+import com.github.bpazy.annotation.PrimaryKey;
 
 import java.util.Date;
 

@@ -1,4 +1,5 @@
-import annotation.Name;
+import com.github.bpazy.annotation.Name;
+import com.github.bpazy.BeanToSQL;
 import org.junit.Test;
 
 import java.lang.reflect.Field;

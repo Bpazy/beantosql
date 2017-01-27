@@ -1,3 +1,5 @@
+package com.github.bpazy;
+
 /**
  * Created by Ziyuan
  * on 2017/1/26
